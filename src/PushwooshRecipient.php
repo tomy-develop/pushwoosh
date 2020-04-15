@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Pushwoosh;
 
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use JsonSerializable;
@@ -26,6 +27,16 @@ class PushwooshRecipient implements JsonSerializable
     }
 
     /**
+     * Send a notification to all registered devices.
+     *
+     * @return \Illuminate\Notifications\AnonymousNotifiable
+     */
+    public static function all()
+    {
+        return (new AnonymousNotifiable)->route('pushwoosh', new static);
+    }
+
+    /**
      * Set the device(s).
      *
      * @param string ...$devices
@@ -39,6 +50,11 @@ class PushwooshRecipient implements JsonSerializable
         return $this;
     }
 
+    /**
+     * Get all supported platforms.
+     *
+     * @return array
+     */
     protected static function getSupportedPlatforms()
     {
         return [

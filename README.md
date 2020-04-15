@@ -122,6 +122,11 @@ Or to multiple users:
 Notification::send($customers, new WishlistItemOnSale($product));
 ```
 
+Or even to all registered devices:
+```php
+Notification::send(PushwooshRecipient::all(), new SaleStarting($sale));
+```
+
 ### Available methods
 This section details the public API of this package.
 
