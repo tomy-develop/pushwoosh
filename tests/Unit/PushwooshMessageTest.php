@@ -42,6 +42,25 @@ class PushwooshMessageTest extends TestCase
     }
 
     /**
+     * Test the modification of the apns trim content.
+     *
+     * @return void
+     */
+    public function testApnsTrimContentModification()
+    {
+        $message = new PushwooshMessage();
+        $this->assertArrayNotHasKey('apns_trim_content', $message->jsonSerialize());
+
+        $message->apnsTrimContent(0);
+        $this->assertArrayHasKey('apns_trim_content', $message->jsonSerialize());
+        $this->assertEquals(0, $message->jsonSerialize()['apns_trim_content']);
+
+        $message->apnsTrimContent(1);
+        $this->assertArrayHasKey('apns_trim_content', $message->jsonSerialize());
+        $this->assertEquals(1, $message->jsonSerialize()['apns_trim_content']);
+    }
+
+    /**
      * Test modification of the campaign code.
      *
      * @return void
@@ -114,6 +133,145 @@ class PushwooshMessageTest extends TestCase
         $message->identifier('foo');
         $this->assertArrayHasKey('transactionId', $message->jsonSerialize());
         $this->assertEquals('foo', $message->jsonSerialize()['transactionId']);
+    }
+
+    /**
+     * Test the modification of the ios badges.
+     *
+     * @return void
+     */
+    public function testIosBadgesModification()
+    {
+        $message = new PushwooshMessage();
+        $this->assertArrayNotHasKey('ios_badges', $message->jsonSerialize());
+
+        $message->iosBadges(1);
+        $this->assertArrayHasKey('ios_badges', $message->jsonSerialize());
+        $this->assertEquals(1, $message->jsonSerialize()['ios_badges']);
+    }
+
+    /**
+     * Test the modification of the ios category id.
+     *
+     * @return void
+     */
+    public function testIosCategoryIdModification()
+    {
+        $message = new PushwooshMessage();
+        $this->assertArrayNotHasKey('ios_category_id', $message->jsonSerialize());
+
+        $message->iosCategoryId(1);
+        $this->assertArrayHasKey('ios_category_id', $message->jsonSerialize());
+        $this->assertEquals(1, $message->jsonSerialize()['ios_category_id']);
+    }
+
+    /**
+     * Test the modification of the ios critical.
+     *
+     * @return void
+     */
+    public function testIosCriticalModification()
+    {
+        $message = new PushwooshMessage();
+        $this->assertArrayNotHasKey('ios_critical', $message->jsonSerialize());
+
+        $message->iosCritical(true);
+        $this->assertArrayHasKey('ios_critical', $message->jsonSerialize());
+        $this->assertEquals(1, $message->jsonSerialize()['ios_critical']);
+    }
+
+    /**
+     * Test the modification of the ios silent.
+     *
+     * @return void
+     */
+    public function testIosSilentModification()
+    {
+        $message = new PushwooshMessage();
+        $this->assertArrayNotHasKey('ios_silent', $message->jsonSerialize());
+
+        $message->iosSilent(0);
+        $this->assertArrayHasKey('ios_silent', $message->jsonSerialize());
+        $this->assertEquals(0, $message->jsonSerialize()['ios_silent']);
+
+        $message->iosSilent(1);
+        $this->assertArrayHasKey('ios_silent', $message->jsonSerialize());
+        $this->assertEquals(1, $message->jsonSerialize()['ios_silent']);
+    }
+
+    /**
+     * Test the modification of the ios sound.
+     *
+     * @return void
+     */
+    public function testIosSoundModification()
+    {
+        $message = new PushwooshMessage();
+        $this->assertArrayNotHasKey('ios_sound', $message->jsonSerialize());
+
+        $message->iosSound('foo');
+        $this->assertArrayHasKey('ios_sound', $message->jsonSerialize());
+        $this->assertEquals('foo', $message->jsonSerialize()['ios_sound']);
+    }
+
+    /**
+     * Test the modification of the ios subtitle.
+     *
+     * @return void
+     */
+    public function testIosSubtitleModification()
+    {
+        $message = new PushwooshMessage();
+        $this->assertArrayNotHasKey('ios_subtitle', $message->jsonSerialize());
+
+        $message->iosSubtitle('foo');
+        $this->assertArrayHasKey('ios_subtitle', $message->jsonSerialize());
+        $this->assertEquals('foo', $message->jsonSerialize()['ios_subtitle']);
+    }
+
+    /**
+     * Test the modification of the ios threadId.
+     *
+     * @return void
+     */
+    public function testIosThreadIdModification()
+    {
+        $message = new PushwooshMessage();
+        $this->assertArrayNotHasKey('ios_thread_id', $message->jsonSerialize());
+
+        $message->iosThreadId('foo');
+        $this->assertArrayHasKey('ios_thread_id', $message->jsonSerialize());
+        $this->assertEquals('foo', $message->jsonSerialize()['ios_thread_id']);
+    }
+
+    /**
+     * Test the modification of the ios title.
+     *
+     * @return void
+     */
+    public function testIosTitleModification()
+    {
+        $message = new PushwooshMessage();
+        $this->assertArrayNotHasKey('ios_title', $message->jsonSerialize());
+
+        $message->iosTitle('foo');
+        $this->assertArrayHasKey('ios_title', $message->jsonSerialize());
+        $this->assertEquals('foo', $message->jsonSerialize()['ios_title']);
+    }
+
+    /**
+     * Test the modification of the ios ttl.
+     *
+     * @return void
+     */
+    public function testIosTtlModification()
+    {
+        $message = new PushwooshMessage();
+        $this->assertArrayNotHasKey('ios_ttl', $message->jsonSerialize());
+
+        $message->iosTtl(1);
+        $this->assertArrayHasKey('ios_ttl', $message->jsonSerialize());
+        $this->assertEquals(1, $message->jsonSerialize()['ios_ttl']);
     }
 
     /**

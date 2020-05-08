@@ -11,11 +11,21 @@ use JsonSerializable;
 class PushwooshMessage implements JsonSerializable
 {
     protected $androidRootParameters;
+    protected $apnsTrimContent;
     protected $campaign;
     protected $content;
     protected $data;
     protected $identifier;
+    protected $iosBadges;
+    protected $iosCategoryId;
+    protected $iosCritical;
     protected $iosRootParameters;
+    protected $iosSilent;
+    protected $iosSound;
+    protected $iosSubtitle;
+    protected $iosThreadId;
+    protected $iosTitle;
+    protected $iosTtl;
     protected $preset;
     protected $recipientTimezone;
     protected $shortenUrl;
@@ -48,6 +58,23 @@ class PushwooshMessage implements JsonSerializable
         if (!$this->identifier) {
             $this->identifier = $notification->id;
         }
+
+        return $this;
+    }
+
+    /**
+     * Set the Pushwoosh apns trim content code.
+     *
+     * @param int $apnsTrimContent
+     * @return $this
+     */
+    public function apnsTrimContent(int $apnsTrimContent)
+    {
+        if (!in_array($apnsTrimContent, [0, 1])) {
+            throw new InvalidArgumentException("Invalid platform {$apnsTrimContent}");
+        }
+
+        $this->apnsTrimContent = $apnsTrimContent;
 
         return $this;
     }
@@ -125,6 +152,127 @@ class PushwooshMessage implements JsonSerializable
     }
 
     /**
+     * Set the Pushwoosh ios badges code.
+     *
+     * @param string $iosBadges
+     * @return $this
+     */
+    public function iosBadges(string $iosBadges)
+    {
+        $this->iosBadges = $iosBadges;
+
+        return $this;
+    }
+
+    /**
+     * Set the Pushwoosh ios category id code.
+     *
+     * @param int $iosCategoryId
+     * @return $this
+     */
+    public function iosCategoryId(int $iosCategoryId)
+    {
+        $this->iosCategoryId = $iosCategoryId;
+
+        return $this;
+    }
+
+    /**
+     * Set the Pushwoosh ios critical code.
+     *
+     * @param bool $iosCritical
+     * @return $this
+     */
+    public function iosCritical(bool $iosCritical)
+    {
+        $this->iosCritical = $iosCritical;
+
+        return $this;
+    }
+
+    /**
+     * Set the Pushwoosh ios silent code.
+     *
+     * @param int $iosSilent
+     * @return $this
+     */
+    public function iosSilent(int $iosSilent)
+    {
+        if (!in_array($iosSilent, [0, 1])) {
+            throw new InvalidArgumentException("Invalid platform {$iosSilent}");
+        }
+
+        $this->iosSilent = $iosSilent;
+
+        return $this;
+    }
+
+    /**
+     * Set the Pushwoosh ios sound code.
+     *
+     * @param string $iosSound
+     * @return $this
+     */
+    public function iosSound(string $iosSound)
+    {
+        $this->iosSound = $iosSound;
+
+        return $this;
+    }
+
+    /**
+     * Set the Pushwoosh ios subtitle code.
+     *
+     * @param string $iosSubtitle
+     * @return $this
+     */
+    public function iosSubtitle(string $iosSubtitle)
+    {
+        $this->iosSubtitle = $iosSubtitle;
+
+        return $this;
+    }
+
+    /**
+     * Set the Pushwoosh ios thread id code.
+     *
+     * @param string $iosThreadId
+     * @return $this
+     */
+    public function iosThreadId(string $iosThreadId)
+    {
+        $this->iosThreadId = $iosThreadId;
+
+        return $this;
+    }
+
+    /**
+     * Set the Pushwoosh ios title code.
+     *
+     * @param string $iosTitle
+     * @return $this
+     */
+    public function iosTitle(string $iosTitle)
+    {
+        $this->iosTitle = $iosTitle;
+
+        return $this;
+    }
+
+    /**
+     * Set the Pushwoosh ios ttl code.
+     *
+     * @param int $iosTtl
+     * @return $this
+     */
+    public function iosTtl(int $iosTtl)
+    {
+        $this->iosTtl = $iosTtl;
+
+        return $this;
+    }
+
+    /**
      * Convert the message into something JSON serializable.
      *
      * @return array
@@ -133,11 +281,21 @@ class PushwooshMessage implements JsonSerializable
     {
         $payload = [
             'android_root_params' => $this->androidRootParameters,
+            'apns_trim_content' => $this->apnsTrimContent,
             'campaign' => $this->campaign,
             'content' => $this->content,
             'data' => $this->data,
             'ignore_user_timezone' => !$this->recipientTimezone,
+            'ios_badges' => $this->iosBadges,
+            'ios_category_id' => $this->iosCategoryId,
+            'ios_critical' => $this->iosCritical,
             'ios_root_params' => $this->iosRootParameters,
+            'ios_silent' => $this->iosSilent,
+            'ios_sound' => $this->iosSound,
+            'ios_subtitle' => $this->iosSubtitle,
+            'ios_thread_id' => $this->iosThreadId,
+            'ios_title' => $this->iosTitle,
+            'ios_ttl' => $this->iosTtl,
             'link' => $this->url,
             'minimize_link' => $this->url ? $this->shortenUrl : null,
             'preset' => $this->preset,
